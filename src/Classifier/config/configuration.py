@@ -1,6 +1,7 @@
 from Classifier.constants import *
 from Classifier.utils.common import read_yaml,create_directories
 from Classifier.entity.config_entity import DataIngestionConfig
+from Classifier.entity.config_entity import ModelConfig
 
 
 
@@ -28,3 +29,21 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+    def get_base_model_config(self)->ModelConfig:
+        config = self.config.prepare_model
+        params = self.params
+        create_directories([config.root_dir])
+
+        model_config=ModelConfig(
+            root_dir=config.root_dir,
+            model_path=config.model_path,
+            updated_model_path=config.updated_model_path,
+            learning_rate=params.LEARNING_RATE,
+            image_size=params.IMAGE_SIZE,
+            include_top=params.INCLUDE_TOP,
+            weights = params.WEIGHTS,
+            classes= params.CLASSES
+            
+        )
+        return model_config
