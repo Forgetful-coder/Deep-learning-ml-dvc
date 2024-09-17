@@ -42,7 +42,7 @@ class Prepare_Base_Model:
         )
 
         full_model.compile(
-            optimizer=keras.optimizers.legacy.SGD(learning_rate=learning_rate),
+            optimizer=keras.optimizers.legacy.Adam(learning_rate=learning_rate),
             loss=keras.losses.CategoricalCrossentropy(),
             metrics=["accuracy"]
         )

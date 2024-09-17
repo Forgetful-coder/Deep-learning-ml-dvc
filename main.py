@@ -1,6 +1,7 @@
 from Classifier import logger
 from Classifier.pipeline.data_ingestion_pipeline01 import DataIngestionPipeline
 from Classifier.pipeline.base_model_prep_02 import BaseModelPipeline
+from Classifier.pipeline.model_train_03 import TrainModelPipeline
 
 Stage_name= 'DATA INGESTION'
 try:
@@ -17,6 +18,19 @@ if __name__=='__main__':
     try:
         logger.info(f">>>>>> stage {Stage_name} started <<<<<<")
         obj = BaseModelPipeline()
+        obj.main()
+        logger.info(f">>>>>> stage {Stage_name} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise e
+
+
+Stage_name= 'MODEL TRAIN'
+
+if __name__=='__main__':
+    try:
+        logger.info(f">>>>>> stage {Stage_name} started <<<<<<")
+        obj = TrainModelPipeline()
         obj.main()
         logger.info(f">>>>>> stage {Stage_name} completed <<<<<<\n\nx==========x")
     except Exception as e:
